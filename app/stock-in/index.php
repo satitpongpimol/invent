@@ -18,8 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pallete_no = $_POST['txtpallete_no'];
     $inhkanban = $_POST['txtinhkanban_no'];
 
-    $column = array('');
-
     switch ($step) {
         case 0:
             $pallete_no = $_POST['txtpalletno'];
@@ -47,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         }
                         else {
                             set_display_message('error', $valid_kanban_result->content);
-                            $operation_flag = 'NG';            
+                            $operation_flag = 'NG';      
                         }
             } else {
                 set_display_message('error', $valid_kanban_result->content);

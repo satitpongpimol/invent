@@ -77,7 +77,7 @@ CSS;
 }
 function get_news($device_id)
 {
-    return '<div class="news-box"><ul><li class="msg-error">แจ้งปิดระบบ เพื่อทำการปรับปรุงให้ดีขึ้น - 30/12/2018</li><li class="msg-warning">แจ้งปิดระบบ เพื่อทำการปรับปรุงให้ดีขึ้น - 30/11/2018</li></ul></div>';
+    return '<div class="news-box"><ul><li class="msg-error">-</li><li class="msg-warning">-</li></ul></div>';
 }
 //short hand play sound
 function play_sound($sound)

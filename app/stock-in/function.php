@@ -23,7 +23,15 @@ function shopping_do($rid, $inhouse_sn, $cust_partno)
 function validate_inhouse_sn($inhouse_sn)
 {
     //$result = CallAPIGET('fast', "ValidateFGSerial?_USERNAME={$_SESSION['username']}&_DEVICE={$_SESSION['DeviceId']}&_SN={$sn}", false);
-    $result = CallAPIPOST('api', 'InsertReceive', array('doctype' => '1234', 'mmtype' => '1','qty' => '1', 'qrcode' => $inhouse_sn,'deviceid' => $_SESSION['DeviceId']));
+    $result = callAPIPOST('api', 'InsertReceive', array('doctype' => '1234', 'mmtype' => '1','qty' => '1', 'qrcode' => $inhouse_sn,'deviceid' => $_SESSION['DeviceId']));
+    
+    return $result;
+}
+
+function get_last_scan()
+{
+    //$result = CallAPIGET('fast', "ValidateFGSerial?_USERNAME={$_SESSION['username']}&_DEVICE={$_SESSION['DeviceId']}&_SN={$sn}", false);
+    $result = CallAPIGET('api', 'GetReceive','');
     
     return $result;
 }
