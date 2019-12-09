@@ -12,7 +12,6 @@ $operation_flag = '';
 
 $pallete_no = '';
 $inhkanban = '';
-$valid_kanban_result = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $step = $_POST['step'];
