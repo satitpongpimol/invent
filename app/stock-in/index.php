@@ -17,7 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $step = $_POST['step'];
     $pallete_no = $_POST['txtpallete_no'];
     $inhkanban = $_POST['txtinhkanban_no'];
-
+    $column = array(
+        'time' => 'Receive Time.',
+        'part_id' => 'Part Cd.',
+        'part_serial' => "Part Serial.",
+    );
     switch ($step) {
         case 0:
             $pallete_no = $_POST['txtpalletno'];
@@ -26,35 +30,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         case 1:
   
             $inhkanban = $_POST['txtinhkanban'];
-            $valid_kanban_result = validate_inhouse_sn($inhkanban);            
+            $valid_kanban_result = validate_inhouse_sn($inhkanban);       
             if (!empty($valid_kanban_result)) {
                         if ($valid_kanban_result->status == 1)
-                        {
+                        {            
                             $receive_list = $valid_kanban_result->receive;
-                            $array = json_decode(json_encode($receive_list),true);
-                            //var_dump($array);    
-                            //exit;
-                            $column = array(
-                                    'time' => 'Receive Time.',
-                                    'part_id' => 'Part Cd.',
-                                    'part_serial' => "Part Serial.",
-                                );
-                                 
-                            $datatable = array('column_header' => $column, 'data_row' => $array);
+                            $_SESSION['data'] = json_decode(json_encode($receive_list),true);
+                            if(isset($_SESSION['data']))
+                            {                   
+                                $datatable = array('column_header' => $column, 'data_row' => $_SESSION['data']);
+                            }
                             $operation_flag = 'OK';
                         }
-                        else {
+                        else {    
+                            if(isset($_SESSION['data']))
+                            {                         
+                                $datatable = array('column_header' => $column, 'data_row' => $_SESSION['data']);
+                            }
                             set_display_message('error', $valid_kanban_result->content);
                             $operation_flag = 'NG';      
                         }
             } else {
-                set_display_message('error', $valid_kanban_result->content);
+                if(isset($_SESSION['data']))
+                {
+                    $datatable = array('column_header' => $column, 'data_row' => $_SESSION['data']);
+                }
+                set_display_message('error', 'ข้อมูลไม่ถูกต้อง');
                 $operation_flag = 'NG';               
             }            
             //--$step;
         break;
     }
-    
+    //unset($_SESSION['data']);
 }else {
     $step = 0;
 }
