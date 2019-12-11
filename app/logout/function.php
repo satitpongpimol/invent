@@ -9,10 +9,6 @@ function gen_logout_form($header_text, $function_flag)
 <td colspan="2"><h3>{$header_text}</h3><hr/></td>
 </tr>
 <tr>
-<td>Username:</td>
-<td>{$_SESSION['username']}</td>
-</tr>
-<tr>
 <td colspan="2">
 <hr/>
 <input type="submit" class="button" name="btnLogout" value="Continue Logout"/><br/>
